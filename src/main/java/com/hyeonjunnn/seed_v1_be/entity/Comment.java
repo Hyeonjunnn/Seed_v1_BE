@@ -27,4 +27,8 @@ public class Comment extends BaseEntity {
 
     @Column(name = "parent_comment_no", nullable = true)
     private Long parentCommentNo = null;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_no", nullable = false)
+    private User user;
 }
