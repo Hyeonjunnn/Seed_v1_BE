@@ -41,13 +41,12 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/actuator/**").permitAll()
-                        .requestMatchers("/api/**").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
-//                        .requestMatchers("/api/v1/alarms/subscribe").permitAll()
-//                        .requestMatchers(HttpMethod.GET, "/api/public/**").permitAll()
-//                        .requestMatchers("/api/test").authenticated() // 인증 필요
-//                        .requestMatchers("/api/user/**").authenticated()
+                        // 게시판
+                        .requestMatchers(HttpMethod.GET, "/api/board/**").permitAll()
+                        // 게시판 카테고리
+                        .requestMatchers(HttpMethod.GET, "/api/board-category/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(
