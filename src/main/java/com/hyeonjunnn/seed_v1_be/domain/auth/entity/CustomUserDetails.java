@@ -1,6 +1,7 @@
 package com.hyeonjunnn.seed_v1_be.domain.auth.entity;
 
 import com.hyeonjunnn.seed_v1_be.entity.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,13 +9,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+@RequiredArgsConstructor
 public class CustomUserDetails implements UserDetails {
     private final User user;
-
-    public CustomUserDetails(User user) {
-        this.user = user;
-    }
-
+    
     public User getUser() {
         return user;
     }

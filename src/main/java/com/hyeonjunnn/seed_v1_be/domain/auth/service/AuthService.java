@@ -1,6 +1,7 @@
 package com.hyeonjunnn.seed_v1_be.domain.auth.service;
 
 import com.hyeonjunnn.seed_v1_be.domain.auth.dto.LoginRequestDto;
+import com.hyeonjunnn.seed_v1_be.domain.auth.dto.LoginResponseDto;
 import com.hyeonjunnn.seed_v1_be.domain.auth.dto.SignUpRequestDto;
 import com.hyeonjunnn.seed_v1_be.domain.auth.dto.TokenResponseDto;
 import com.hyeonjunnn.seed_v1_be.domain.auth.jwt.JwtTokenProvider;
@@ -34,7 +35,7 @@ public class AuthService {
     private final RoleRepository roleRepository;
 
     // 로그인 로직
-    public TokenResponseDto login(LoginRequestDto request) {
+    public LoginResponseDto login(LoginRequestDto request) {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new BadCredentialsException("유효하지 않은 이메일입니다."));
 
@@ -54,7 +55,7 @@ public class AuthService {
         );
         String refreshToken = jwtTokenProvider.createRefreshToken(user.getEmail());
 
-        return new TokenResponseDto(accessToken, refreshToken);
+        return new LoginResponseDto(user.getName(), accessToken, refreshToken);
     }
 
     @Transactional

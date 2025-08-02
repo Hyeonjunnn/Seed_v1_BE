@@ -1,6 +1,7 @@
 package com.hyeonjunnn.seed_v1_be.controller;
 
 import com.hyeonjunnn.seed_v1_be.domain.auth.dto.LoginRequestDto;
+import com.hyeonjunnn.seed_v1_be.domain.auth.dto.LoginResponseDto;
 import com.hyeonjunnn.seed_v1_be.domain.auth.dto.SignUpRequestDto;
 import com.hyeonjunnn.seed_v1_be.domain.auth.dto.TokenResponseDto;
 import com.hyeonjunnn.seed_v1_be.domain.auth.service.AuthService;
@@ -23,10 +24,10 @@ public class AuthController {
 
     @Operation(summary = "로그인", description = "이메일과 비밀번호를 입력하여 로그인하고, JWT 토큰을 발급받습니다.")
     @PostMapping("/login")
-    public ResponseEntity<TokenResponseDto> login(@Valid @RequestBody LoginRequestDto request) {
-        TokenResponseDto tokenResponseDto = authService.login(request);
+    public ResponseEntity<LoginResponseDto> login(@Valid @RequestBody LoginRequestDto request) {
+        LoginResponseDto loginResponseDto = authService.login(request);
 
-        return ResponseEntity.ok(tokenResponseDto);
+        return ResponseEntity.ok(loginResponseDto);
     }
 
     @Operation(summary = "로그아웃", description = "Redis에 담겨있는 정보들을 삭제한다.")
