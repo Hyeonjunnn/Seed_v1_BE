@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -29,9 +29,9 @@ public class BoardResponseDto {
 
     private String userName;
 
-    private OffsetDateTime createdAt;
+    private LocalDateTime createdAt;
 
-    private OffsetDateTime updatedAt;
+    private LocalDateTime updatedAt;
 
     public BoardResponseDto(Board board) {
         this.boardNo = board.getBoardNo();
