@@ -1,0 +1,49 @@
+services:
+  - type: web
+    name: seed-v1-be
+    env: docker
+    plan: free
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: DB_HOST
+        fromDatabase:
+          name: seed-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: seed-db
+          property: port
+      - key: DB_NAME
+        value: seed_v1
+      - key: DB_USER
+        fromDatabase:
+          name: seed-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: seed-db
+          property: password
+      - key: REDIS_HOST
+        fromService:
+          name: seed-redis
+          property: host
+      - key: REDIS_PORT
+        fromService:
+          name: seed-redis
+          property: port
+      - key: REDIS_PASSWORD
+        fromService:
+          name: seed-redis
+          property: password
+
+databases:
+  - name: seed-db
+    databaseName: seed_v1
+    plan: free
+    user: seed_user
+
+services:
+  - type: redis
+    name: seed-redis
+    plan: free
