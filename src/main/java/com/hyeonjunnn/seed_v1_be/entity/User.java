@@ -15,7 +15,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.OffsetDateTime;
+import java.time.Instant;
 
 @Entity
 @Getter
@@ -44,7 +44,7 @@ public class User extends BaseEntity {
     private String password;
 
     @Column(name = "deleted_at")
-    private OffsetDateTime deletedAt;
+    private Instant deletedAt;
 
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted = false;

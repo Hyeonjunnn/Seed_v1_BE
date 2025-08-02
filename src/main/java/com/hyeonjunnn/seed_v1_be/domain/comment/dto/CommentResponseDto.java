@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.OffsetDateTime;
+import java.time.Instant;
 
 @Getter
 @Setter
@@ -25,9 +25,9 @@ public class CommentResponseDto {
 
     private String userName;
 
-    private OffsetDateTime createdAt;
+    private Instant createdAt;
 
-    private OffsetDateTime updatedAt;
+    private Instant updatedAt;
 
     public CommentResponseDto(Comment comment) {
         this.commentNo = comment.getCommentNo();
