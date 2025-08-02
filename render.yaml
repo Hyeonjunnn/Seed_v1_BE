@@ -16,7 +16,7 @@ services:
           property: port
       - key: DB_NAME
         value: seed_v1
-      - key: DB_USER
+      - key: DB_USERNAME
         fromDatabase:
           name: seed-db
           property: user
@@ -42,8 +42,3 @@ databases:
     databaseName: seed_v1
     plan: free
     user: seed_user
-
-services:
-  - type: redis
-    name: seed-redis
-    plan: free
