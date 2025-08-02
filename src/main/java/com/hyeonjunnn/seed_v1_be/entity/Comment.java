@@ -25,18 +25,18 @@ import lombok.Setter;
 public class Comment extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "comment_no")
+    @Column(name = "comment_no", nullable = false)
     private Long commentNo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_no", nullable = false)
     private Board board;
 
-    @Column(name = "content", length = 100, nullable = false)
+    @Column(name = "content", nullable = false, columnDefinition = "TEXT")
     private String content;
 
-    @Column(name = "parent_comment_no", nullable = true)
-    private Long parentCommentNo = null;
+    @Column(name = "parent_comment_no")
+    private Long parentCommentNo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_no", nullable = false)

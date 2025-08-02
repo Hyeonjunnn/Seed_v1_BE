@@ -14,11 +14,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
-
-import java.time.LocalDateTime;
-
-import static java.lang.Boolean.FALSE;
 
 @Entity
 @Getter
@@ -31,7 +26,7 @@ public class Alarm extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "alarm_no", nullable = false)
-    private long alarmNo;
+    private Long alarmNo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_no", nullable = false)
@@ -44,5 +39,5 @@ public class Alarm extends BaseEntity {
     private String content;
 
     @Column(name = "is_read", nullable = false)
-    private boolean isRead = FALSE;
+    private boolean isRead = false;
 }

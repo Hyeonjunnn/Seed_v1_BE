@@ -1,9 +1,9 @@
 package com.hyeonjunnn.seed_v1_be.controller;
 
 import com.hyeonjunnn.seed_v1_be.domain.board.dto.BoardResponseDto;
-import com.hyeonjunnn.seed_v1_be.domain.board_category.dto.Board_categoryRequestDto;
-import com.hyeonjunnn.seed_v1_be.domain.board_category.dto.Board_categoryResponseDto;
-import com.hyeonjunnn.seed_v1_be.domain.board_category.service.Board_categoryService;
+import com.hyeonjunnn.seed_v1_be.domain.boardCategory.dto.BoardCategoryRequestDto;
+import com.hyeonjunnn.seed_v1_be.domain.boardCategory.dto.BoardCategoryResponseDto;
+import com.hyeonjunnn.seed_v1_be.domain.boardCategory.service.BoardCategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -30,9 +30,9 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/board-category")
-@Tag(name = "Board_category", description = "게시판 카테고리 관련 API")
-public class Board_categoryController {
-    private final Board_categoryService boardCategoryService;
+@Tag(name = "BoardCategory", description = "게시판 카테고리 관련 API")
+public class BoardCategoryController {
+    private final BoardCategoryService boardCategoryService;
 
     @GetMapping()
     @Operation(summary = "게시판 카테고리 목록 조회", description = "전체 게시판 카테고리의 목록을 조회한다.")
@@ -53,8 +53,8 @@ public class Board_categoryController {
                     content = @Content(mediaType = "application/json")
             )
     })
-    public ResponseEntity<List<Board_categoryResponseDto>> getBoard_categories () {
-        List<Board_categoryResponseDto> boardCategoryResponseDtos =  boardCategoryService.getBoard_categories();
+    public ResponseEntity<List<BoardCategoryResponseDto>> getBoard_categories () {
+        List<BoardCategoryResponseDto> boardCategoryResponseDtos =  boardCategoryService.getBoard_categories();
 
         if (!boardCategoryResponseDtos.isEmpty()) {
             return ResponseEntity.ok(boardCategoryResponseDtos);
@@ -87,10 +87,10 @@ public class Board_categoryController {
             )
     })
     @PreAuthorize(value = "hasRole('ADMIN')")
-    public ResponseEntity<BoardResponseDto> createBoard_category (
-            @RequestBody Board_categoryRequestDto boardCategoryRequestDto) {
+    public ResponseEntity<BoardResponseDto> createBoardCategory (
+            @RequestBody BoardCategoryRequestDto boardCategoryRequestDto) {
 
-        boardCategoryService.saveBoard_category(boardCategoryRequestDto);
+        boardCategoryService.saveBoardCategory(boardCategoryRequestDto);
 
         return ResponseEntity.noContent().build();
     }
@@ -118,11 +118,11 @@ public class Board_categoryController {
             )
     })
     @PreAuthorize(value = "hasRole('ADMIN')")
-    public ResponseEntity<Board_categoryResponseDto> updateBoard_category (
+    public ResponseEntity<BoardCategoryResponseDto> updateBoardCategory (
             @PathVariable Long boardCategoryNo
-            , @RequestBody Board_categoryRequestDto boardCategoryRequestDto) {
+            , @RequestBody BoardCategoryRequestDto boardCategoryRequestDto) {
 
-        boardCategoryService.updateBoard_category(boardCategoryNo, boardCategoryRequestDto);
+        boardCategoryService.updateBoardCategory(boardCategoryNo, boardCategoryRequestDto);
 
         return ResponseEntity.noContent().build();
     }
@@ -150,9 +150,9 @@ public class Board_categoryController {
             )
     })
     @PreAuthorize(value = "hasRole('ADMIN')")
-    public ResponseEntity<Board_categoryResponseDto> deleteBoard_category (
+    public ResponseEntity<BoardCategoryResponseDto> deleteBoardCategory (
             @PathVariable Long boardCategoryNo) {
-        boardCategoryService.deleteBoard_category(boardCategoryNo);
+        boardCategoryService.deleteBoardCategory(boardCategoryNo);
 
         return ResponseEntity.noContent().build();
     }

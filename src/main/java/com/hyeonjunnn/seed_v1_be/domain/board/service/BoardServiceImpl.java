@@ -3,9 +3,9 @@ package com.hyeonjunnn.seed_v1_be.domain.board.service;
 import com.hyeonjunnn.seed_v1_be.domain.board.dto.BoardRequestDto;
 import com.hyeonjunnn.seed_v1_be.domain.board.dto.BoardResponseDto;
 import com.hyeonjunnn.seed_v1_be.domain.board.repository.BoardRepository;
-import com.hyeonjunnn.seed_v1_be.domain.board_category.repository.Board_categoryRepository;
+import com.hyeonjunnn.seed_v1_be.domain.boardCategory.repository.BoardCategoryRepository;
 import com.hyeonjunnn.seed_v1_be.entity.Board;
-import com.hyeonjunnn.seed_v1_be.entity.Board_category;
+import com.hyeonjunnn.seed_v1_be.entity.BoardCategory;
 import com.hyeonjunnn.seed_v1_be.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,11 +19,11 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 public class BoardServiceImpl implements BoardService {
     private final BoardRepository boardRepository;
-    private final Board_categoryRepository board_categoryRepository;
+    private final BoardCategoryRepository boardCategoryRepository;
 
     @Override
     public void saveBoard(User user, BoardRequestDto boardRequestDto) {
-        Board_category boardCategory = board_categoryRepository.findById(boardRequestDto.getBoardCategoryNo())
+        BoardCategory boardCategory = boardCategoryRepository.findById(boardRequestDto.getBoardCategoryNo())
                 .orElseThrow(() -> new RuntimeException("해당 카테고리를 찾을 수 없습니다."));
 
         Board board = Board.builder()
@@ -71,7 +71,7 @@ public class BoardServiceImpl implements BoardService {
             throw new RuntimeException("게시물 작성자가 아닙니다.");
         }
 
-        Board_category boardCategory = board_categoryRepository.findById(boardRequestDto.getBoardCategoryNo())
+        BoardCategory boardCategory = boardCategoryRepository.findById(boardRequestDto.getBoardCategoryNo())
                 .orElseThrow(() -> new RuntimeException("해당 카테고리를 찾을 수 없습니다."));
 
         board.setBoardCategory(boardCategory);
