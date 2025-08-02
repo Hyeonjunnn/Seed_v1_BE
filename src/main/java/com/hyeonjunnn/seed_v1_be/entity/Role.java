@@ -2,6 +2,8 @@ package com.hyeonjunnn.seed_v1_be.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -19,8 +21,9 @@ import lombok.Setter;
 @Table(name = "role")
 public class Role {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_no", nullable = false)
-    private Integer roleNo;
+    private Long roleNo;
 
     @Column(name = "name", length = 100, nullable = false)
     private String name;
