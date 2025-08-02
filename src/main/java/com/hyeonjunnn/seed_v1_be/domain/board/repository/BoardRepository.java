@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BoardRepository extends JpaRepository<Board, Long> {
-//    Page<Board> findBoardsByBoardCategory_BoardCategoryNo(Pageable pageable, Long boardCategoryNo);
-
     Page<Board> findBoardsByBoardCategory_BoardCategoryNoAndTitleContains(Pageable pageable, Long boardCategoryNo, String boardTitle);
+
+    Page<Board> findBoardsByBoardCategory_BoardCategoryNoAndTitleContainsAndIsDeletedFalse(Pageable pageable, Long boardCategoryNo, String boardTitle);
 }

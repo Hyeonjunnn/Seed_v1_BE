@@ -1,8 +1,10 @@
 package com.hyeonjunnn.seed_v1_be.controller;
 
+import com.hyeonjunnn.seed_v1_be.domain.auth.entity.CustomUserDetails;
 import com.hyeonjunnn.seed_v1_be.domain.board.dto.BoardRequestDto;
 import com.hyeonjunnn.seed_v1_be.domain.board.dto.BoardResponseDto;
 import com.hyeonjunnn.seed_v1_be.domain.board.service.BoardService;
+import com.hyeonjunnn.seed_v1_be.entity.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -10,12 +12,15 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,10 +33,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/board")
-@Tag(name = "Board APIs", description = "게시판 관련 API 목록")
+@Tag(name = "Board", description = "게시판 관련 API")
 public class BoardController {
     private final BoardService boardService;
 
@@ -54,16 +60,19 @@ public class BoardController {
                     content = @Content(mediaType = "application/json")
             )
     })
-    public ResponseEntity<List<BoardResponseDto>> getBoards (
+    public ResponseEntity<Page<BoardResponseDto>> getBoards (
             @ParameterObject
             @PageableDefault(page = 0, size = 10, direction = Sort.Direction.DESC, sort = "boardNo") Pageable pageable
+            , @AuthenticationPrincipal CustomUserDetails customUserDetails
             , @RequestParam(required = true) Long boardCategoryNo
             , @RequestParam(required = false, defaultValue = "") String boardTitle) {
 
-        Page<BoardResponseDto> boardResponseDtos = boardService.getBoards(pageable, boardCategoryNo, boardTitle);
+        User user = (customUserDetails != null) ? customUserDetails.getUser() : null;
+
+        Page<BoardResponseDto> boardResponseDtos = boardService.getBoards(pageable, user, boardCategoryNo, boardTitle);
 
         if (!boardResponseDtos.isEmpty()) {
-            return ResponseEntity.ok(boardResponseDtos.getContent());
+            return ResponseEntity.ok(boardResponseDtos);
         } else {
             return ResponseEntity.noContent().build();
         }
@@ -120,9 +129,12 @@ public class BoardController {
             )
     })
     public ResponseEntity<BoardResponseDto> createBoard (
-            @RequestBody BoardRequestDto boardRequestDto) {
+            @AuthenticationPrincipal CustomUserDetails customUserDetails
+            , @RequestBody BoardRequestDto boardRequestDto) {
 
-        boardService.saveBoard(boardRequestDto);
+        User user = customUserDetails.getUser();
+
+        boardService.saveBoard(user, boardRequestDto);
 
         return ResponseEntity.noContent().build();
     }
@@ -150,9 +162,12 @@ public class BoardController {
             )
     })
     public ResponseEntity<BoardResponseDto> updateBoard (
-            @PathVariable Long boardNo, @RequestBody BoardRequestDto boardRequestDto) {
+            @AuthenticationPrincipal CustomUserDetails customUserDetails
+            , @PathVariable Long boardNo, @RequestBody BoardRequestDto boardRequestDto) {
 
-        boardService.updateBoard(boardNo, boardRequestDto);
+        User user = customUserDetails.getUser();
+
+        boardService.updateBoard(user, boardNo, boardRequestDto);
 
         return ResponseEntity.noContent().build();
     }
@@ -179,9 +194,13 @@ public class BoardController {
                     content = @Content(mediaType = "application/json")
             )
     })
-    public ResponseEntity<BoardResponseDto> deleteBoard (@PathVariable Long boardNo) {
+    public ResponseEntity<BoardResponseDto> deleteBoard (
+            @AuthenticationPrincipal CustomUserDetails customUserDetails
+            , @PathVariable Long boardNo) {
 
-        boardService.deleteBoard(boardNo);
+        User user = customUserDetails.getUser();
+
+        boardService.deleteBoard(user, boardNo);
 
         return ResponseEntity.noContent().build();
     }
