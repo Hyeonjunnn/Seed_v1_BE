@@ -1,5 +1,6 @@
 package com.hyeonjunnn.seed_v1_be.entity;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +26,6 @@ public class Role {
     @Column(name = "role_no", nullable = false)
     private Long roleNo;
 
-    @Column(name = "name", length = 100, nullable = false)
+    @Column(name = "name", length = 50, nullable = false, unique = true)
     private String name;
 }

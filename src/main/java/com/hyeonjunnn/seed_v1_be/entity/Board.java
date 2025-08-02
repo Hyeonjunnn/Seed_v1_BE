@@ -16,10 +16,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
-import java.time.LocalDateTime;
-
-import static java.lang.Boolean.FALSE;
-
 @Entity
 @Getter
 @Setter
@@ -38,8 +34,8 @@ public class Board extends BaseEntity {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "board_category_no", nullable = false)
-    private Board_category boardCategory;
+    @JoinColumn(name = "boardCategory_no", nullable = false)
+    private BoardCategory boardCategory;
 
     @Column(name = "title", length = 100, nullable = false)
     private String title;
@@ -49,6 +45,6 @@ public class Board extends BaseEntity {
 
     @Builder.Default
     @Column(name = "is_deleted", nullable = false)
-    @ColumnDefault("'FALSE'")
-    private Boolean isDeleted = FALSE;
+    @ColumnDefault("false")
+    private Boolean isDeleted = false;
 }

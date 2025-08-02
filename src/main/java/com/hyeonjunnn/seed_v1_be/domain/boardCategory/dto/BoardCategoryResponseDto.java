@@ -1,6 +1,6 @@
-package com.hyeonjunnn.seed_v1_be.domain.board_category.dto;
+package com.hyeonjunnn.seed_v1_be.domain.boardCategory.dto;
 
-import com.hyeonjunnn.seed_v1_be.entity.Board_category;
+import com.hyeonjunnn.seed_v1_be.entity.BoardCategory;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,12 +10,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Board_categoryResponseDto {
+public class BoardCategoryResponseDto {
     private Long boardCategoryNo;
 
     private String name;
 
-    public Board_categoryResponseDto(Board_category boardCategory) {
+    public BoardCategoryResponseDto(BoardCategory boardCategory) {
         this.boardCategoryNo = boardCategory.getBoardCategoryNo();
         this.name = boardCategory.getName();
     }

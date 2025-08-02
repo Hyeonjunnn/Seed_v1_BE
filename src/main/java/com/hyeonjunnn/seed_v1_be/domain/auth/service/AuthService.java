@@ -38,17 +38,8 @@ public class AuthService {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new BadCredentialsException("유효하지 않은 이메일입니다."));
 
-        System.out.println("====================");
-        System.out.println(user.getUserNo());
-        System.out.println(user.getEmail());
-        System.out.println(user.getName());
-        System.out.println(user.getRole());
-        System.out.println(user.getRole().getRoleNo());
-        System.out.println(user.getRole().getName());
-        System.out.println("====================");
-
         // 탈퇴 계정인지 확인
-        if (user.getIsDeleted()) {
+        if (user.isDeleted()) {
             throw new BadCredentialsException("탈퇴한 계정입니다.");
         }
 

@@ -1,4 +1,4 @@
-package com.hyeonjunnn.seed_v1_be.domain.board_category.dto;
+package com.hyeonjunnn.seed_v1_be.domain.boardCategory.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Board_categoryRequestDto {
+public class BoardCategoryRequestDto {
     private Long boardCategoryNo;
 
     private String name;

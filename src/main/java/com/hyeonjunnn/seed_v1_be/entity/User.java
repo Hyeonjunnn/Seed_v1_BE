@@ -17,16 +17,14 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-import static java.lang.Boolean.FALSE;
-
 @Entity
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user")
-public class User extends BaseEntity {
+@Table(name = "users")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_no", nullable = false)
@@ -39,18 +37,18 @@ public class User extends BaseEntity {
     @Column(name = "name", length = 100, nullable = false)
     private String name;
 
-    @Column(name = "email", length = 100, nullable = false)
+    @Column(name = "email", length = 100, nullable = false, unique = true)
     private String email;
 
     @Column(name = "password", length = 100, nullable = false)
     private String password;
 
-    @Column(name = "deleted_at", nullable = true)
-    private LocalDateTime deletedAt = null;
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
 
     @Column(name = "is_deleted", nullable = false)
-    private Boolean isDeleted = FALSE;
+    private boolean isDeleted = false;
 
-    @Column(name = "deleted_content", length = 100, nullable = true)
-    private String deletedContent = null;
+    @Column(name = "deleted_content", columnDefinition = "TEXT")
+    private String deletedContent;
 }

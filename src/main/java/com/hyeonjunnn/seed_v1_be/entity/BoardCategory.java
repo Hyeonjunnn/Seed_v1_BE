@@ -18,13 +18,13 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "board_category")
-public class Board_category {
+@Table(name = "boardCategory")
+public class BoardCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "board_category_no", nullable = false)
+    @Column(name = "boardCategory_no", nullable = false)
     private Long boardCategoryNo;
 
-    @Column(name = "name", length = 20,nullable = false)
+    @Column(name = "name", length = 20, nullable = false, unique = true)
     private String name;
 }
