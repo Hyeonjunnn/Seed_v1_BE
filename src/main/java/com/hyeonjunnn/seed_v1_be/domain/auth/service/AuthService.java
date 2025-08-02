@@ -3,7 +3,6 @@ package com.hyeonjunnn.seed_v1_be.domain.auth.service;
 import com.hyeonjunnn.seed_v1_be.domain.auth.dto.LoginRequestDto;
 import com.hyeonjunnn.seed_v1_be.domain.auth.dto.LoginResponseDto;
 import com.hyeonjunnn.seed_v1_be.domain.auth.dto.SignUpRequestDto;
-import com.hyeonjunnn.seed_v1_be.domain.auth.dto.TokenResponseDto;
 import com.hyeonjunnn.seed_v1_be.domain.auth.jwt.JwtTokenProvider;
 import com.hyeonjunnn.seed_v1_be.domain.role.repository.RoleRepository;
 import com.hyeonjunnn.seed_v1_be.domain.user.repository.UserRepository;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.SecureRandom;
-import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
 @Service
