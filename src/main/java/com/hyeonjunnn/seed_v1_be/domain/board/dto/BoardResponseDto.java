@@ -25,6 +25,8 @@ public class BoardResponseDto {
 
     private String boardCategoryName;
 
+    private Long boardCategoryNo;
+
     private String userEmail;
 
     private String userName;
@@ -37,6 +39,7 @@ public class BoardResponseDto {
         this.boardNo = board.getBoardNo();
         this.title = board.getTitle();
         this.content = board.getContent();
+        this.boardCategoryNo = board.getBoardCategory().getBoardCategoryNo();
         this.boardCategoryName = board.getBoardCategory().getName();
         this.userEmail = board.getUser().getEmail();
         this.userName = board.getUser().getName();
