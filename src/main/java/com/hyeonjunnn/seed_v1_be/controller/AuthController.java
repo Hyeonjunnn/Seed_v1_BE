@@ -3,14 +3,11 @@ package com.hyeonjunnn.seed_v1_be.controller;
 import com.hyeonjunnn.seed_v1_be.domain.auth.dto.LoginRequestDto;
 import com.hyeonjunnn.seed_v1_be.domain.auth.dto.LoginResponseDto;
 import com.hyeonjunnn.seed_v1_be.domain.auth.dto.SignUpRequestDto;
-import com.hyeonjunnn.seed_v1_be.domain.auth.dto.TokenResponseDto;
 import com.hyeonjunnn.seed_v1_be.domain.auth.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-//import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
