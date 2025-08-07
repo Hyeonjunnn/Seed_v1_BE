@@ -5,7 +5,7 @@ COPY . .
 RUN gradle clean build -x test
 
 # 2. 런타임 스테이지
-FROM eclipse-temurin:21-jdk-alpine
+FROM docker.io/eclipse-temurin:21-jdk-alpine
 WORKDIR /app
 COPY --from=builder /app/build/libs/Seed_v1_BE-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
