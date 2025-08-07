@@ -44,6 +44,11 @@ public class Board extends BaseEntity {
     private String content;
 
     @Builder.Default
+    @Column(name = "is_visible", nullable = false)
+    @ColumnDefault("true")
+    private Boolean isVisible = true;
+
+    @Builder.Default
     @Column(name = "is_deleted", nullable = false)
     @ColumnDefault("false")
     private Boolean isDeleted = false;
