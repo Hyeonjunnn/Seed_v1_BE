@@ -1,0 +1,48 @@
+package com.hyeonjunnn.seed_v1_be.entity;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.Instant;
+
+@Entity
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "schedule")
+public class Schedule extends BaseEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "schedule_no", nullable = false)
+    private Long scheduleNo;
+
+    @Column(name = "title", length = 50, nullable = false)
+    private String title;
+
+    @Column(name = "content", nullable = true)
+    private String content;
+
+    @Column(name = "started_at", nullable = false)
+    private Instant startedAt;
+
+    @Column(name = "ended_at", nullable = false)
+    private Instant endedAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_no", nullable = false)
+    private User user;
+}
