@@ -1,0 +1,7 @@
+package com.hyeonjunnn.seed_v1_be.domain.project.repository;
+
+import com.hyeonjunnn.seed_v1_be.entity.Project;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ProjectRepository extends JpaRepository<Project, Long> {
+}
