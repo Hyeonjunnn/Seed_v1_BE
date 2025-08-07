@@ -1,6 +1,5 @@
 package com.hyeonjunnn.seed_v1_be.entity;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,13 +18,12 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "role")
-public class Role extends BaseEntity {
+@Table(name = "status")
+public class Status extends BaseEntity{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "role_no", nullable = false)
-    private Long roleNo;
+    @Column(name = "status_code", length = 20, nullable = false)
+    private String statusCode;
 
-    @Column(name = "name", length = 50, nullable = false, unique = true)
-    private String name;
+    @Column(name = "content", length = 50, nullable = false)
+    private String content;
 }

@@ -11,6 +11,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Getter
@@ -27,4 +28,14 @@ public class BoardCategory {
 
     @Column(name = "name", length = 20, nullable = false, unique = true)
     private String name;
+
+    @Builder.Default
+    @Column(name = "parent_board_category_no", nullable = true)
+    @ColumnDefault("null")
+    private Long parentBoardCategoryNo = null;
+
+    @Builder.Default
+    @Column(name = "is_visible", nullable = false)
+    @ColumnDefault("false")
+    private boolean isVisible = false;
 }
