@@ -10,5 +10,5 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StatusResponseDto {
-    // TODO: StatusResponseDto 생성 필요
+    //TODO: StatusResponseDto 생성 필요
 }

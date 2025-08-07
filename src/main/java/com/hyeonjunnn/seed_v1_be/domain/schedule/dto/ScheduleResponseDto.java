@@ -10,5 +10,5 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ScheduleResponseDto {
-    // TODO: ScheduleResponseDto 생성 필요
+    //TODO: ScheduleResponseDto 생성 필요
 }

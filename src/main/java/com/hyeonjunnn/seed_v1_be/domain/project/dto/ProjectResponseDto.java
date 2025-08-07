@@ -10,5 +10,5 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProjectResponseDto {
-    // TODO: ProjectResponseDto 생성 필요
+    //TODO: ProjectResponseDto 생성 필요
 }
