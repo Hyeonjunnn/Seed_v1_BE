@@ -1,5 +1,6 @@
 package com.hyeonjunnn.seed_v1_be.domain.techCategory.dto;
 
+import com.hyeonjunnn.seed_v1_be.entity.TechCategory;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,5 +11,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TechCategoryResponseDto {
-    //TODO: TechCategoryResponseDto 생성 필요
+    private String techCategoryName;
+
+    public TechCategoryResponseDto(TechCategory techCategory) {
+        this.techCategoryName = techCategory.getName();
+    }
 }

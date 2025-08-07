@@ -1,11 +1,16 @@
 package com.hyeonjunnn.seed_v1_be.domain.techCategory.service;
 
+import com.hyeonjunnn.seed_v1_be.domain.techCategory.dto.TechCategoryRequestDto;
+import com.hyeonjunnn.seed_v1_be.domain.techCategory.dto.TechCategoryResponseDto;
+
+import java.util.List;
+
 public interface TechCategoryService {
-    //TODO: C: 기술 분류 생성
+    void createTechCategory(TechCategoryRequestDto techCategoryRequestDto);
 
-    //TODO: R: 기술 분류 조회
+    List<TechCategoryResponseDto> getTechCategories();
 
-    //TODO: U: 기술 분류 수정
+    void updateTechCategory(Long techCategoryNo, TechCategoryRequestDto techCategoryRequestDto);
 
-    //TODO: D: 기술 분류 삭제
+    void deleteTechCategory(Long techCategoryNo);
 }

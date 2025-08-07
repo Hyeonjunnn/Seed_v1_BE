@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 public class ScheduleResponseDto {
     //TODO: ScheduleResponseDto 생성 필요
 }
