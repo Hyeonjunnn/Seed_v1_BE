@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ScheduleMappedCategoryRepository
         extends JpaRepository<ScheduleMappedCategory, Long> {
+    boolean deleteAllByScheduleScheduleNo(Long scheduleNo);
 }

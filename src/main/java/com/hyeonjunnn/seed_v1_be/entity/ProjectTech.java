@@ -30,12 +30,12 @@ public class ProjectTech {
     private ProjectTechId id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("projectNo") // 필수
+    @MapsId("projectNo")
     @JoinColumn(name = "project_no")
     private Project project;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("techNo") // 필수
+    @MapsId("techNo")
     @JoinColumn(name = "tech_no")
     private Tech tech;
 
@@ -53,4 +53,3 @@ public class ProjectTech {
         private Long techNo;
     }
 }
-

@@ -1,13 +1,18 @@
 package com.hyeonjunnn.seed_v1_be.domain.status.service;
 
+import com.hyeonjunnn.seed_v1_be.domain.status.dto.StatusRequestDto;
+import com.hyeonjunnn.seed_v1_be.domain.status.dto.StatusResponseDto;
+
+import java.util.List;
+
 public interface StatusService {
-    //TODO: C: 상태 생성(관리자)
+    void createStatus(StatusRequestDto statusRequestDto);
 
-    //TODO: R: 상태 모두 보기
+    List<StatusResponseDto> getStatuses();
 
-    //TODO: R2: 상태 관련 코드만 보기
+    List<StatusResponseDto> getStatusesByPrefix(String prefix);
 
-    //TODO: U: 상태 수정
+    void updateStatus(String statusCode, StatusRequestDto statusRequestDto);
 
-    //TODO: D: 상태 삭제
+    void deleteStatus(String statusCode);
 }

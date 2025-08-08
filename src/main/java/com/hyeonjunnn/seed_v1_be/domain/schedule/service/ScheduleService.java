@@ -1,13 +1,19 @@
 package com.hyeonjunnn.seed_v1_be.domain.schedule.service;
 
+import com.hyeonjunnn.seed_v1_be.domain.schedule.dto.ScheduleRequestDto;
+import com.hyeonjunnn.seed_v1_be.domain.schedule.dto.ScheduleResponseDto;
+import com.hyeonjunnn.seed_v1_be.entity.Schedule;
+
+import java.util.List;
+
 public interface ScheduleService {
-    //TODO: C: 일정 생성
+    void createSchedule(ScheduleRequestDto scheduleRequestDto);
 
-    //TODO: R: 일정 전체 조회
+    List<ScheduleResponseDto> getSchedules();
 
-    //TODO: R2: 일정 단건 조회
+    ScheduleResponseDto getSchedule(Long scheduleNo);
 
-    //TODO: U: 일정 수정
+    void updateSchedule(Long scheduleNo, ScheduleRequestDto scheduleRequestDto);
 
-    //TODO: D: 일정 삭제
+    void deleteSchedule(Long scheduleNo);
 }
