@@ -171,6 +171,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    @Transactional
     public void deleteProject(User user, Long projectNo) {
         Project project = projectRepository.findById(projectNo)
                 .orElseThrow(() -> new RuntimeException("존재하지 않는 프로젝트입니다."));
@@ -179,7 +180,6 @@ public class ProjectServiceImpl implements ProjectService {
             throw new RuntimeException("프로젝트 생성자가 아닙니다.");
         }
 
-        projectRepository.deleteById(projectNo);
-        //TODO: 프로젝트 삭제되면 프로젝트 기술 모두 삭제 가능하도록
+        projectRepository.delete(project);
     }
 }
