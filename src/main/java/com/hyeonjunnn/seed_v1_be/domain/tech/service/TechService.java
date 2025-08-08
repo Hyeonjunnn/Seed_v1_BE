@@ -6,7 +6,7 @@ import com.hyeonjunnn.seed_v1_be.domain.tech.dto.TechResponseDto;
 import java.util.List;
 
 public interface TechService {
-    void createTech(TechRequestDto techRequestDto);
+    void saveTech(TechRequestDto techRequestDto);
 
     List<TechResponseDto> getTechs();
 

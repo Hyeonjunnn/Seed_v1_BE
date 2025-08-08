@@ -5,16 +5,17 @@ import com.hyeonjunnn.seed_v1_be.domain.schedule.dto.ScheduleResponseDto;
 import com.hyeonjunnn.seed_v1_be.domain.schedule.repository.ScheduleRepository;
 import com.hyeonjunnn.seed_v1_be.domain.scheduleCategory.repository.ScheduleCategoryRepository;
 import com.hyeonjunnn.seed_v1_be.domain.scheduleMappedCategory.repository.ScheduleMappedCategoryRepository;
-import com.hyeonjunnn.seed_v1_be.entity.ProjectTech;
 import com.hyeonjunnn.seed_v1_be.entity.Schedule;
 import com.hyeonjunnn.seed_v1_be.entity.ScheduleCategory;
 import com.hyeonjunnn.seed_v1_be.entity.ScheduleMappedCategory;
+import com.hyeonjunnn.seed_v1_be.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -25,13 +26,26 @@ public class ScheduleServiceImpl implements ScheduleService {
     private final ScheduleCategoryRepository scheduleCategoryRepository;
 
     @Override
-    public void createSchedule(ScheduleRequestDto scheduleRequestDto) {
+    public void createSchedule(User user, ScheduleRequestDto scheduleRequestDto) {
+        Schedule schedule = Schedule.builder()
+                .title(scheduleRequestDto.getTitle())
+                .content(scheduleRequestDto.getContent())
+                .startedAt(scheduleRequestDto.getStartedAt())
+                .endedAt(scheduleRequestDto.getEndedAt())
+                .user(user)
+                .build();
 
+        scheduleRepository.save(schedule);
     }
 
     @Override
     public List<ScheduleResponseDto> getSchedules() {
-        return null;
+        List<ScheduleResponseDto> scheduleResponseDtos
+                = scheduleRepository.findAll()
+                .stream().map(ScheduleResponseDto::new)
+                .collect(Collectors.toList());
+
+        return scheduleResponseDtos;
     }
 
     @Override
@@ -46,9 +60,13 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     @Transactional
-    public void updateSchedule(Long scheduleNo, ScheduleRequestDto scheduleRequestDto) {
+    public void updateSchedule(User user, Long scheduleNo, ScheduleRequestDto scheduleRequestDto) {
         Schedule schedule = scheduleRepository.findById(scheduleNo)
                 .orElseThrow(() -> new RuntimeException("존재하지 않는 일정입니다."));
+
+        if (!user.getUserNo().equals(schedule.getUser().getUserNo())) {
+            throw new RuntimeException("작성자가 아닙니다.");
+        }
 
         schedule.setTitle(scheduleRequestDto.getTitle());
         schedule.setContent(scheduleRequestDto.getContent());
@@ -78,9 +96,13 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     @Transactional
-    public void deleteSchedule(Long scheduleNo) {
+    public void deleteSchedule(User user, Long scheduleNo) {
         Schedule schedule = scheduleRepository.findById(scheduleNo)
                 .orElseThrow(() -> new RuntimeException("존재하지 않는 일정입니다."));
+
+        if (!user.getUserNo().equals(schedule.getUser().getUserNo())) {
+            throw new RuntimeException("작성자가 아닙니다.");
+        }
 
         scheduleRepository.delete(schedule);
     }

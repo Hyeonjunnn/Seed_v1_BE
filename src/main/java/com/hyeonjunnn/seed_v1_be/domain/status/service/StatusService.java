@@ -6,13 +6,13 @@ import com.hyeonjunnn.seed_v1_be.domain.status.dto.StatusResponseDto;
 import java.util.List;
 
 public interface StatusService {
-    void createStatus(StatusRequestDto statusRequestDto);
+    void saveStatus(StatusRequestDto statusRequestDto);
 
     List<StatusResponseDto> getStatuses();
 
     List<StatusResponseDto> getStatusesByPrefix(String prefix);
 
-    void updateStatus(String statusCode, StatusRequestDto statusRequestDto);
+    void updateStatus(StatusRequestDto statusRequestDto);
 
-    void deleteStatus(String statusCode);
+    void deleteStatus(StatusRequestDto statusRequestDto);
 }

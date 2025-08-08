@@ -22,7 +22,7 @@ public class TechServiceImpl implements TechService {
     private final TechCategoryRepository techCategoryRepository;
 
     @Override
-    public void createTech(TechRequestDto techRequestDto) {
+    public void saveTech(TechRequestDto techRequestDto) {
         TechCategory techCategory =
                 techCategoryRepository.findById(techRequestDto.getTechCategoryNo())
                         .orElseThrow(() -> new RuntimeException("존재하지 않는 기술 카테고리입니다."));

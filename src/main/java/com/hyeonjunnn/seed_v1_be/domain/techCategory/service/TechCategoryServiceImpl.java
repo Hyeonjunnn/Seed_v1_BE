@@ -19,8 +19,12 @@ public class TechCategoryServiceImpl implements TechCategoryService {
     private final TechCategoryRepository techCategoryRepository;
 
     @Override
-    public void createTechCategory(TechCategoryRequestDto techCategoryRequestDto) {
+    public void saveTechCategory(TechCategoryRequestDto techCategoryRequestDto) {
+        TechCategory techCategory = TechCategory.builder()
+                .name(techCategoryRequestDto.getTechCategoryName())
+                .build();
 
+        techCategoryRepository.save(techCategory);
     }
 
     @Override

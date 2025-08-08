@@ -19,7 +19,7 @@ public class StatusServiceImpl implements StatusService {
     private final StatusRepository statusRepository;
 
     @Override
-    public void createStatus(StatusRequestDto statusRequestDto) {
+    public void saveStatus(StatusRequestDto statusRequestDto) {
         Status status = Status.builder()
                 .statusCode(statusRequestDto.getStatusCode())
                 .content(statusRequestDto.getContent())
@@ -50,16 +50,16 @@ public class StatusServiceImpl implements StatusService {
 
     @Override
     @Transactional
-    public void updateStatus(String statusCode, StatusRequestDto statusRequestDto) {
-        Status status = statusRepository.findById(statusCode)
+    public void updateStatus(StatusRequestDto statusRequestDto) {
+        Status status = statusRepository.findById(statusRequestDto.getStatusCode())
                 .orElseThrow(() -> new RuntimeException("존재하지 않는 상태입니다."));
 
         status.setContent(statusRequestDto.getContent());
     }
 
     @Override
-    public void deleteStatus(String statusCode) {
-        Status status = statusRepository.findById(statusCode)
+    public void deleteStatus(StatusRequestDto statusRequestDto) {
+        Status status = statusRepository.findById(statusRequestDto.getStatusCode())
                 .orElseThrow(() -> new RuntimeException("존재하지 않는 상태입니다."));
 
         statusRepository.delete(status);

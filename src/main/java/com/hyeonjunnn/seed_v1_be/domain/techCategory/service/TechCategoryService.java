@@ -6,7 +6,7 @@ import com.hyeonjunnn.seed_v1_be.domain.techCategory.dto.TechCategoryResponseDto
 import java.util.List;
 
 public interface TechCategoryService {
-    void createTechCategory(TechCategoryRequestDto techCategoryRequestDto);
+    void saveTechCategory(TechCategoryRequestDto techCategoryRequestDto);
 
     List<TechCategoryResponseDto> getTechCategories();
 
