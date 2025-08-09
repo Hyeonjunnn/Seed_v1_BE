@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface BoardCategoryRepository extends JpaRepository<BoardCategory, Long> {
-    List<BoardCategory> findBoardCategoriesByIsVisibleEquals(boolean isVisible);
+    List<BoardCategory> findBoardCategoriesByNameInAndIsVisibleTrue(List<String> categoryNames);
 }

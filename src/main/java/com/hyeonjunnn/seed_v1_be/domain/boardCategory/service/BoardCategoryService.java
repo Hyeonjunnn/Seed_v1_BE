@@ -10,7 +10,7 @@ public interface BoardCategoryService {
 
     void saveBoardCategory(BoardCategoryRequestDto boardCategoryRequestDto);
 
-    List<BoardCategoryResponseDto> getBoard_categories(User user);
+    List<BoardCategoryResponseDto> getBoard_categories(User user, String method);
 
     void updateBoardCategory(Long boardCategoryNo, BoardCategoryRequestDto boardCategoryRequestDto);
 

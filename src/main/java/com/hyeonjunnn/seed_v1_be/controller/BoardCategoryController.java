@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -57,11 +58,11 @@ public class BoardCategoryController {
             )
     })
     public ResponseEntity<List<BoardCategoryResponseDto>> getBoard_categories (
-            @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+            @AuthenticationPrincipal CustomUserDetails customUserDetails
+            , @RequestParam(required = false, defaultValue = "GET") String method) {
+        User user = (customUserDetails != null) ? customUserDetails.getUser() : null;
 
-        User user = customUserDetails.getUser();
-
-        List<BoardCategoryResponseDto> boardCategoryResponseDtos =  boardCategoryService.getBoard_categories(user);
+        List<BoardCategoryResponseDto> boardCategoryResponseDtos =  boardCategoryService.getBoard_categories(user, method);
 
         if (!boardCategoryResponseDtos.isEmpty()) {
             return ResponseEntity.ok(boardCategoryResponseDtos);
