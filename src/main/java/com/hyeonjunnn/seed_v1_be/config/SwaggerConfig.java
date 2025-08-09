@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
         info = @Info(
                 title = "Seed Project API",
                 description = "",
-                version = "0.1.0"
+                version = "0.1.1"
         )
 )
 public class SwaggerConfig {
