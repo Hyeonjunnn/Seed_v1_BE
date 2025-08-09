@@ -4,6 +4,7 @@ import com.hyeonjunnn.seed_v1_be.domain.boardCategory.dto.BoardCategoryRequestDt
 import com.hyeonjunnn.seed_v1_be.domain.boardCategory.dto.BoardCategoryResponseDto;
 import com.hyeonjunnn.seed_v1_be.domain.boardCategory.repository.BoardCategoryRepository;
 import com.hyeonjunnn.seed_v1_be.entity.BoardCategory;
+import com.hyeonjunnn.seed_v1_be.entity.User;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,18 +27,19 @@ public class BoardCategoryServiceImpl implements BoardCategoryService {
         boardCategoryRepository.save(boardCategory);
     }
 
-//    @Override
-//    public BoardCategory getBoardCategory(Long boardCategoryNo) {
-//        BoardCategory boardCategory = boardCategoryRepository.findById(boardCategoryNo)
-//                .map(BoardResponseDto::new).orElseThrow(() -> new RuntimeException("게시물을 찾을 수 없습니다."));
-//
-//        return null;
-//    }
-
     @Override
-    public List<BoardCategoryResponseDto> getBoard_categories() {
-        List<BoardCategoryResponseDto> boardCategoryResponseDtos = boardCategoryRepository.findAll()
-                .stream().map(BoardCategoryResponseDto::new).collect(Collectors.toList());
+    public List<BoardCategoryResponseDto> getBoard_categories(User user) {
+        List<BoardCategoryResponseDto> boardCategoryResponseDtos;
+
+        if (user.getRole().getName().equals("ADMIN")) {
+            boardCategoryResponseDtos = boardCategoryRepository.findAll()
+                    .stream().map(BoardCategoryResponseDto::new)
+                    .collect(Collectors.toList());
+        } else {
+            boardCategoryResponseDtos = boardCategoryRepository.findBoardCategoriesByIsVisibleEquals(true)
+                    .stream().map(BoardCategoryResponseDto::new)
+                    .collect(Collectors.toList());
+        }
 
         return boardCategoryResponseDtos;
     }

@@ -1,9 +1,11 @@
 package com.hyeonjunnn.seed_v1_be.controller;
 
+import com.hyeonjunnn.seed_v1_be.domain.auth.entity.CustomUserDetails;
 import com.hyeonjunnn.seed_v1_be.domain.board.dto.BoardResponseDto;
 import com.hyeonjunnn.seed_v1_be.domain.boardCategory.dto.BoardCategoryRequestDto;
 import com.hyeonjunnn.seed_v1_be.domain.boardCategory.dto.BoardCategoryResponseDto;
 import com.hyeonjunnn.seed_v1_be.domain.boardCategory.service.BoardCategoryService;
+import com.hyeonjunnn.seed_v1_be.entity.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -15,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,8 +56,12 @@ public class BoardCategoryController {
                     content = @Content(mediaType = "application/json")
             )
     })
-    public ResponseEntity<List<BoardCategoryResponseDto>> getBoard_categories () {
-        List<BoardCategoryResponseDto> boardCategoryResponseDtos =  boardCategoryService.getBoard_categories();
+    public ResponseEntity<List<BoardCategoryResponseDto>> getBoard_categories (
+            @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+
+        User user = customUserDetails.getUser();
+
+        List<BoardCategoryResponseDto> boardCategoryResponseDtos =  boardCategoryService.getBoard_categories(user);
 
         if (!boardCategoryResponseDtos.isEmpty()) {
             return ResponseEntity.ok(boardCategoryResponseDtos);
