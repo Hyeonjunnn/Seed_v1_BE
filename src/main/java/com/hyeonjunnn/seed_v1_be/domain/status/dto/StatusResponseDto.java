@@ -1,5 +1,6 @@
 package com.hyeonjunnn.seed_v1_be.domain.status.dto;
 
+import com.hyeonjunnn.seed_v1_be.entity.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,5 +11,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StatusResponseDto {
-    // TODO: StatusResponseDto 생성 필요
+    private String statusCode;
+
+    private String content;
+
+    public StatusResponseDto(Status status) {
+        this.statusCode = status.getStatusCode();
+        this.content = status.getContent();
+    }
 }

@@ -1,4 +1,4 @@
-package com.hyeonjunnn.seed_v1_be.domain.tech.dto;
+package com.hyeonjunnn.seed_v1_be.domain.projectTech.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TechRequestDto {
-    private String techName;
+public class ProjectTechRequestDto {
+    private Long projectNo;
 
-    private Long techCategoryNo;
+    private Long techNo;
 }

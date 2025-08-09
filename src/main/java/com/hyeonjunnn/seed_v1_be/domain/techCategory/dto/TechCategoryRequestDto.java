@@ -10,5 +10,5 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TechCategoryRequestDto {
-    // TODO: TechCategoryRequestDto 생성 필요
+    private String techCategoryName;
 }

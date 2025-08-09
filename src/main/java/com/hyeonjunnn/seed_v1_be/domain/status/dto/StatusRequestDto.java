@@ -10,5 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StatusRequestDto {
-    // TODO: StatusRequestDto 생성 필요
+    private String statusCode;
+
+    private String content;
 }

@@ -1,5 +1,6 @@
 package com.hyeonjunnn.seed_v1_be.entity;
 
+import com.hyeonjunnn.seed_v1_be.domain.projectLink.dto.ProjectLinkRequestDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -42,4 +43,8 @@ public class ProjectLink {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_code", nullable = false)
     private Status status;
+
+    public ProjectLink(ProjectLinkRequestDto projectLinkRequestDto) {
+
+    }
 }

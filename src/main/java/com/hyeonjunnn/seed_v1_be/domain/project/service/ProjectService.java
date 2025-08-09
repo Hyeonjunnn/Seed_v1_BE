@@ -1,13 +1,21 @@
 package com.hyeonjunnn.seed_v1_be.domain.project.service;
 
+import com.hyeonjunnn.seed_v1_be.domain.project.dto.ProjectRequestDto;
+import com.hyeonjunnn.seed_v1_be.domain.project.dto.ProjectResponseDto;
+import com.hyeonjunnn.seed_v1_be.entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import java.util.List;
+
 public interface ProjectService {
-    // TODO: C: 프로젝트 생성
+    void saveProject(User user, ProjectRequestDto projectRequestDto);
 
-    // TODO: R: 프로젝트 전체 조회
+    Page<ProjectResponseDto> getProjects(User user, Pageable pageable);
 
-    // TODO: R2: 프로젝트 단건 조회
+    ProjectResponseDto getProject(Long projectNo);
 
-    // TODO: U: 프로젝트 수정
+    void updateProject(User user, Long projectNo, ProjectRequestDto projectRequestDto);
 
-    // TODO: D: 프로젝트 삭제
+    void deleteProject(User user, Long projectNo);
 }

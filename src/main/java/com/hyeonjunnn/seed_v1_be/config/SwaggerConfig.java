@@ -10,9 +10,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @OpenAPIDefinition(
         info = @Info(
-                title = "Spring API",
+                title = "Seed Project API",
                 description = "",
-                version = "0.0.0"
+                version = "0.1.0"
         )
 )
 public class SwaggerConfig {

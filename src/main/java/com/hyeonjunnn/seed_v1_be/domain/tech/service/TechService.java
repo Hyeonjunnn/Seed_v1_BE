@@ -1,11 +1,16 @@
 package com.hyeonjunnn.seed_v1_be.domain.tech.service;
 
+import com.hyeonjunnn.seed_v1_be.domain.tech.dto.TechRequestDto;
+import com.hyeonjunnn.seed_v1_be.domain.tech.dto.TechResponseDto;
+
+import java.util.List;
+
 public interface TechService {
-    // TODO: C: 기술 생성
+    void saveTech(TechRequestDto techRequestDto);
 
-    // TODO: R: 기술 전체 조회
+    List<TechResponseDto> getTechs();
 
-    // TODO: U: 기술 수정
+    void updateTech(Long techNo, TechRequestDto techRequestDto);
 
-    // TODO: D: 기술 삭제
+    void deleteTech(Long techNo);
 }

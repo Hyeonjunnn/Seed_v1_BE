@@ -4,9 +4,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,10 +27,25 @@ import java.io.Serializable;
 @Table(name = "schedule_mapped_category")
 public class ScheduleMappedCategory {
     @EmbeddedId
-    private ScheduleMappedCategory.ScheduleMappedCategoryNo no;
+    private ScheduleMappedCategoryId id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("scheduleNo")
+    @JoinColumn(name = "schedule_no")
+    private Schedule schedule;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("scheduleCategoryNo")
+    @JoinColumn(name = "schedule_category_no")
+    private ScheduleCategory scheduleCategory;
 
     @Embeddable
-    public static class ScheduleMappedCategoryNo implements Serializable {
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @EqualsAndHashCode
+    public static class ScheduleMappedCategoryId implements Serializable {
         @Column(name = "schedule_no")
         private Long scheduleNo;
 

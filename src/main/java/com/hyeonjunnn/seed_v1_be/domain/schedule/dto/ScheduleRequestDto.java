@@ -5,10 +5,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.Instant;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class ScheduleRequestDto {
-    // TODO: ScheduleRequestDto 생성 필요
+    private String title;
+
+    private String content;
+
+    private Instant startedAt;
+
+    private Instant endedAt;
+
+    private List<Long> scheduleCategoriesNo;
 }
