@@ -20,7 +20,7 @@ import org.hibernate.annotations.ColumnDefault;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "boardCategory")
-public class BoardCategory {
+public class BoardCategory extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "boardCategory_no", nullable = false)
