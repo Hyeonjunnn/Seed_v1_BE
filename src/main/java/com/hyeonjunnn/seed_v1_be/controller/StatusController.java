@@ -32,7 +32,7 @@ public class StatusController {
     private final StatusService statusService;
 
     @GetMapping()
-    @Operation(summary = "상태 목록 조회", description = "전체 상태의 목록을 조회한다.")
+    @Operation(summary = "상태 목록 조회", description = "전체 또는 접두어 상태의 목록을 조회한다.")
     @ApiResponses({
             @ApiResponse(
                     responseCode = "200",
@@ -51,42 +51,15 @@ public class StatusController {
             )
     })
     @PreAuthorize(value = "hasRole('ADMIN')")
-    public ResponseEntity<List<StatusResponseDto>> getStatuses () {
-
-        List<StatusResponseDto> statusResponseDtos
-                = statusService.getStatuses();
-
-        if (!statusResponseDtos.isEmpty()) {
-            return ResponseEntity.ok(statusResponseDtos);
-        } else {
-            return ResponseEntity.noContent().build();
-        }
-    }
-
-    @GetMapping()
-    @Operation(summary = "접두어 상태 목록 조회", description = "접두어로 상태의 목록을 조회한다.")
-    @ApiResponses({
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "OK",
-                    content = @Content(mediaType = "application/json")
-            ),
-            @ApiResponse(
-                    responseCode = "404",
-                    description = "NOT FOUND",
-                    content = @Content(mediaType = "application/json")
-            ),
-            @ApiResponse(
-                    responseCode = "500",
-                    description = "INTERNAL SERVER ERROR",
-                    content = @Content(mediaType = "application/json")
-            )
-    })
-    public ResponseEntity<List<StatusResponseDto>> getStatusesByPrefix (
+    public ResponseEntity<List<StatusResponseDto>> getStatuses (
             @RequestBody String prefix) {
+        List<StatusResponseDto> statusResponseDtos;
 
-        List<StatusResponseDto> statusResponseDtos
-                = statusService.getStatusesByPrefix(prefix);
+        if (prefix.isEmpty()){
+            statusResponseDtos = statusService.getStatuses();
+        } else {
+            statusResponseDtos = statusService.getStatusesByPrefix(prefix);
+        }
 
         if (!statusResponseDtos.isEmpty()) {
             return ResponseEntity.ok(statusResponseDtos);
@@ -94,7 +67,7 @@ public class StatusController {
             return ResponseEntity.noContent().build();
         }
     }
-
+    
     @PostMapping()
     @Operation(summary = "상태 추가", description = "상태를 추가한다.")
     @ApiResponses({

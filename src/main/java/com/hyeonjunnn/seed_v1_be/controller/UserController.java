@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping()
+    @GetMapping("/{name}")
     @Operation(summary = "단건 유저 조회", description = "로그인한 유저 본인의 정보를 조회한다.")
     @ApiResponses({
             @ApiResponse(
