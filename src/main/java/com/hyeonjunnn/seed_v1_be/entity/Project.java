@@ -40,6 +40,9 @@ public class Project extends BaseEntity {
     @JoinColumn(name = "user_no", nullable = false)
     private User user;
 
+    @Column(name = "name", length = 30, nullable = false)
+    private String name;
+
     @Column(name = "type", length = 20, nullable = false)
     private String type;
 

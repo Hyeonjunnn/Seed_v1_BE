@@ -15,6 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProjectRequestDto {
+    private String name;
+
     private String type;
 
     private String consistOf;
