@@ -11,9 +11,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProjectTechResponseDto {
+    private Long techNo;
     private String techName;
+    private String techCategoryName;
 
     public ProjectTechResponseDto(ProjectTech projectTech) {
+        this.techNo = projectTech.getTech().getTechNo();
         this.techName = projectTech.getTech().getName();
+        this.techCategoryName = projectTech.getTech().getTechCategory().getName();
     }
 }

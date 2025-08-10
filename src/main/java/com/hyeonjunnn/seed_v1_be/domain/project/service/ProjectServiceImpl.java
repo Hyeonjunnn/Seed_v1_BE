@@ -8,6 +8,8 @@ import com.hyeonjunnn.seed_v1_be.domain.projectLink.repository.ProjectLinkReposi
 import com.hyeonjunnn.seed_v1_be.domain.projectTech.dto.ProjectTechResponseDto;
 import com.hyeonjunnn.seed_v1_be.domain.projectTech.repository.ProjectTechRepository;
 import com.hyeonjunnn.seed_v1_be.domain.tech.repository.TechRepository;
+import com.hyeonjunnn.seed_v1_be.domain.techCategory.dto.TechCategoryResponseDto;
+import com.hyeonjunnn.seed_v1_be.domain.techCategory.repository.TechCategoryRepository;
 import com.hyeonjunnn.seed_v1_be.entity.Project;
 import com.hyeonjunnn.seed_v1_be.entity.ProjectLink;
 import com.hyeonjunnn.seed_v1_be.entity.ProjectTech;
@@ -32,12 +34,14 @@ public class ProjectServiceImpl implements ProjectService {
     private final ProjectLinkRepository projectLinkRepository;
     private final ProjectTechRepository projectTechRepository;
     private final TechRepository techRepository;
+    private final TechCategoryRepository techCategoryRepository;
 
     @Override
     public void saveProject(User user, ProjectRequestDto projectRequestDto) {
         Status defaultProjectStatus = Status.builder().statusCode("PRJ-003").build();
 
         Project project = Project.builder()
+                .name(projectRequestDto.getName())
                 .type(projectRequestDto.getType())
                 .consistOf(projectRequestDto.getConsistOf())
                 .job(projectRequestDto.getJob())
@@ -88,7 +92,7 @@ public class ProjectServiceImpl implements ProjectService {
     public Page<ProjectResponseDto> getProjects(User user, Pageable pageable) {
         Page<Project> projects;
 
-        if (user.getRole().getName().equals("ADMIN")) {
+        if (user != null && user.getRole().getName().equals("ADMIN")) {
             projects = projectRepository.findAll(pageable);
         } else {
             projects = projectRepository.findProjectsByIsVisibleTrue(pageable);
@@ -144,6 +148,7 @@ public class ProjectServiceImpl implements ProjectService {
             throw new RuntimeException("프로젝트 생성자가 아닙니다.");
         }
 
+        project.setName(projectRequestDto.getName());
         project.setType(projectRequestDto.getType());
         project.setConsistOf(projectRequestDto.getConsistOf());
         project.setJob(projectRequestDto.getJob());

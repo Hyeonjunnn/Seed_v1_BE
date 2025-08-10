@@ -16,6 +16,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProjectResponseDto {
+    private Long projectNo;
+
+    private String name;
+
     private String type;
 
     private String consistOf;
@@ -41,6 +45,8 @@ public class ProjectResponseDto {
     private List<ProjectTechResponseDto> projectTechResponseDtos;
 
     public ProjectResponseDto(Project project) {
+        this.projectNo = project.getProjectNo();
+        this.name = project.getName();
         this.type = project.getType();
         this.consistOf = project.getConsistOf();
         this.job = project.getJob();

@@ -47,6 +47,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/board/**").permitAll()
                         // 게시판 카테고리
                         .requestMatchers(HttpMethod.GET, "/api/board-category/**").permitAll()
+                        // 프로젝트
+                        .requestMatchers(HttpMethod.GET, "/api/project/**").permitAll()
+                        // 기술 카테고리
+                        .requestMatchers(HttpMethod.GET, "/api/techCategory/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(
