@@ -101,6 +101,13 @@ public class ProjectServiceImpl implements ProjectService {
         Page<ProjectResponseDto> projectResponseDtos = projects.map(project -> {
             ProjectResponseDto projectResponseDto = new ProjectResponseDto(project);
 
+            List<ProjectLinkResponseDto> projectLinkResponseDtos =
+                    projectLinkRepository.findProjectLinksByProjectProjectNo(project.getProjectNo())
+                            .stream().map(ProjectLinkResponseDto::new)
+                            .collect(Collectors.toList());
+
+            projectResponseDto.setProjectLinkResponseDtos(projectLinkResponseDtos);
+
             List<ProjectTechResponseDto> projectTechResponseDtos =
                     projectTechRepository.findProjectTechesByProjectProjectNo(project.getProjectNo())
                             .stream()
