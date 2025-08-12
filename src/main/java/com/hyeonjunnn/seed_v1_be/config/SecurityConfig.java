@@ -51,6 +51,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/project/**").permitAll()
                         // 기술 카테고리
                         .requestMatchers(HttpMethod.GET, "/api/techCategory/**").permitAll()
+                        // 기술
+                        .requestMatchers(HttpMethod.GET, "/api/tech/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(
